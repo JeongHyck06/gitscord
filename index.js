@@ -16,7 +16,6 @@ const client = new Client({
 });
 client.commands = new Collection();
 
-// 재귀적으로 파일 탐색
 function loadCommands(directory) {
     const files = fs.readdirSync(directory, {
         withFileTypes: true,
@@ -26,7 +25,6 @@ function loadCommands(directory) {
         const fullPath = path.join(directory, file.name);
 
         if (file.isDirectory()) {
-            // 디렉토리라면 재귀 호출
             loadCommands(fullPath);
         } else if (
             file.isFile() &&
@@ -46,7 +44,6 @@ function loadCommands(directory) {
     }
 }
 
-// 명령어 파일 로드
 const commandsPath = path.join(__dirname, 'commands');
 loadCommands(commandsPath);
 
